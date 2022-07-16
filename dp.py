@@ -7,3 +7,14 @@ def LCS(A, B):
             else:
                 dp[i+1][j+1] = max(dp[i][j+1], dp[i+1][j])
     return dp[-1][-1]
+
+def LIS(A, strict=False):
+    from bisect import bisect_left
+
+    INF = 10**18
+    N = len(A)
+    dp = [INF] * N
+    for a in A:
+        i = bisect_left(dp, a + (1 - strict))
+        dp[i] = a
+    return bisect_left(dp, INF)

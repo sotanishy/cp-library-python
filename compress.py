@@ -10,3 +10,6 @@ class Compress:
 
     def decompress(self, i):
         return self.xs[i]
+
+    def size(self):
+        return len(self.xs)

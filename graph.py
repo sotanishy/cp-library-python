@@ -25,6 +25,22 @@ def dijkstra(G, s):
     return dist
 
 
+def bfs(G, s):
+    from collections import deque
+
+    INF = 10**18
+    dist = [INF] * len(G)
+    dist[s] = 0
+    que = deque([0])
+    while que:
+        v = que.popleft()
+        for u in G[v]:
+            if dist[u] == INF:
+                dist[u] = dist[v] + 1
+                que.append(u)
+    return dist
+
+
 # returns None if the graph contains a negative cycle
 def bellman_ford(G, V, s):
     INF = 10**18

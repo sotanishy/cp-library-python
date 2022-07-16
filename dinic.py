@@ -13,7 +13,7 @@ class Dinic:
         self.G[u].append(self.Edge(v, cap, len(self.G[v])))
         self.G[v].append(self.Edge(u, 0, len(self.G[u])-1))
 
-    # calculate the shortest distance from s
+    # calculates the shortest distance from s
     def bfs(self, s):
         from collections import deque
 
@@ -28,7 +28,7 @@ class Dinic:
                     self.level[e.v] = self.level[u] + 1
                     queue.append(e.v)
 
-    # find a path
+    # finds a path
     def dfs(self, u, t, f):
         if u == t:
             return f
@@ -45,7 +45,7 @@ class Dinic:
             self.iter[u] += 1
         return 0
 
-    # find the max flow from s to v
+    # finds the max flow from s to v
     def max_flow(self, s, t):
         flow = 0
         INF = 10**18
@@ -59,3 +59,16 @@ class Dinic:
                 if f == 0:
                     break
                 flow += f
+
+    # checks if v is reachable from s in the residual network
+    def min_cut(self, s):
+        visited = [False] * self.V
+        st = [s]
+        visited[s] = True
+        while st:
+            u = st.pop()
+            for e in self.G[u]:
+                if e.cap > 0 and not visited[e.v]:
+                    visited[e.v] = True
+                    st.append(e.v)
+        return visited

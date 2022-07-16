@@ -85,3 +85,9 @@ class LCA:
 
     def dist(self, u, v):
         return self.depth[u] + self.depth[v] - 2 * self.depth[self.lca(u, v)]
+
+    def ancestor(self, v, k):
+        for i in range(self.log)[::-1]:
+            if k >= (1 << i):
+                v = self.parent[i][v]
+                k -= 1 << i

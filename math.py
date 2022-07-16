@@ -18,8 +18,30 @@ def comb_preprocess(n, mod):
     fact_inv[n] = pow(fact[n], mod-2, mod)
     for i in range(1, n+1)[::-1]:
         fact_inv[i-1] = i * fact_inv[i] % mod
-    comb = lambda n, k: fact[n] * fact_inv[k] * fact_inv[n-k] % mod
+
+    def comb(n, k):
+        if k < 0 or n < k:
+            return 0
+        return fact[n] * fact_inv[k] * fact_inv[n-k] % mod
+
     return fact, fact_inv, comb
+
+def comb_lucas(n, k, mod):
+    def comb(n, k):
+        if n < k:
+            return 0
+        num = den = 1
+        for i in range(k):
+            num *= n - i
+            den *= i + 1
+        return num // den
+
+    ret = 1
+    while n > 0:
+        n, p = divmod(n, mod)
+        k, q = divmod(k, mod)
+        ret = ret * comb(p, q) % mod
+    return ret
 
 
 def is_prime(n):
