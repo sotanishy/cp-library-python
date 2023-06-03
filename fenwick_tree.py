@@ -31,6 +31,7 @@ class FenwickTree:
             k //= 2
         return i + 1
 
+
 class RangeFenwickTree:
     def __init__(self, size):
         self.bit0 = FenwickTree(size)
@@ -77,22 +78,23 @@ class FenwickTree2D:
             i -= i & -i
         return ret
 
+
 class FenwickTreeSet:
     def __init__(self, max_val):
         self.max_val = max_val
-        self.fw = FenwickTree(max_val + 1)
+        self.ft = FenwickTree(max_val + 1)
 
     def add(self, x):
-        self.fw.add(x, 1)
+        self.ft.add(x, 1)
 
     def remove(self, x):
-        self.fw.add(x, -1)
+        self.ft.add(x, -1)
 
     def pred(self, x):
-        return self.fw.lower_bound(self.fw.prefix_sum(x)) - 1
+        return self.ft.lower_bound(self.ft.prefix_sum(x)) - 1
 
     def succ(self, x):
-        return self.fw.lower_bound(self.fw.prefix_sum(x) + 1) - 1
+        return self.ft.lower_bound(self.ft.prefix_sum(x) + 1) - 1
 
     def size(self):
-        return self.fw.prefix_sum(self.max_val + 1)
+        return self.ft.prefix_sum(self.max_val + 1)

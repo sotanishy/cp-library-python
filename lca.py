@@ -91,3 +91,4 @@ class LCA:
             if k >= (1 << i):
                 v = self.parent[i][v]
                 k -= 1 << i
+        return v

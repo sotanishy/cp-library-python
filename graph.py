@@ -31,7 +31,7 @@ def bfs(G, s):
     INF = 10**18
     dist = [INF] * len(G)
     dist[s] = 0
-    que = deque([0])
+    que = deque([s])
     while que:
         v = que.popleft()
         for u in G[v]:
