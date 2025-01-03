@@ -204,3 +204,28 @@ def tree_diameter(G):
     _, u = dfs(0)
     d, v = dfs(u)
     return d, v
+
+def functional_graph_cycles(a):
+    # return cycles of a functional graph
+    n = len(a)
+    cycles = []
+    visited = [-1] * n
+    k = 0
+    for v in range(n):
+        if visited[v] != -1:
+            continue
+
+        while visited[v] == -1:
+            visited[v] = k
+            v = a[v]
+        if visited[v] == k:
+            cycle = [v]
+            v = a[v]
+            while v != cycle[0]:
+                cycle.append(v)
+                v = a[v]
+            cycles.append(cycle)
+
+        k += 1
+
+    return cycles

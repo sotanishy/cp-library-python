@@ -16,6 +16,9 @@ class WeightedUnionFind:
         return r
 
     def unite(self, x, y, w):
+        if self.same(x, y):
+            assert self.diff(x, y) == w
+            return
         w += self.weight[x] - self.weight[y]
         x = self.find(x)
         y = self.find(y)
